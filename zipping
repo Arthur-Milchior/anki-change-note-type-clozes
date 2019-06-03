@@ -1,0 +1,2 @@
+rm changefromClozed.zip
+zip changefromClozed.zip config.* *py  LICENSE *.md zipping --exclude \*~ \*zip
