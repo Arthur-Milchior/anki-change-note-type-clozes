@@ -30,6 +30,10 @@ then by default, they map to each other.
 
 This can be deactivated in the configuration.
 
+Default «change note type» window occuring with this add-on.
+![Example](example.png)
+
+
 ## Warning
 This add-on was created 3rd of June 2019. It is still new, and may
 have unfound bugs. So please, before using it, make a back-up, check
