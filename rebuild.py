@@ -41,17 +41,17 @@ def _rebuildMap(self, key):
         assoc = eltToPos(sourcesNames, targets)
     else:
         assoc = enumerate(sourcesNames)
-    for i, templateName in assoc:
-        l.addWidget(QLabel(_("Change %s to:") % templateName), i, 0)
+    for indexSrc, (indexDst, templateName) in enumerate(assoc):
+        l.addWidget(QLabel(_("Change %s to:") % templateName), indexSrc, 0)
         cb = QComboBox()
         cb.addItems(targets + [_("Nothing")])
-        idx = min(i, len(targets))
+        idx = min(indexDst, len(targets))
         cb.setCurrentIndex(idx)
         indices[cb] = idx
         cb.currentIndexChanged.connect(
             lambda i, cb=cb, key=key: self.onComboChanged(i, cb, key))
         combos.append(cb)
-        l.addWidget(cb, i, 1)
+        l.addWidget(cb, indexSrc, 1)
     map.setLayout(l)
     lay.addWidget(map)
     setattr(self, key + "widg", map)
