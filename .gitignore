@@ -104,3 +104,5 @@ venv.bak/
 .mypy_cache/
 *~
 /changefromClozed.zip
+/bidirectional.py
+/meta.json
