@@ -23,10 +23,10 @@ def eltToElt(list1, list2):
         else:
             value = None
         mapping.append((key,value))
-    print(f"eltToElt({list1},{list2}) = {mapping}")
+    #print(f"eltToElt({list1},{list2}) = {mapping}")
     return mapping
-    
-    
+
+
 def eltToPos(list1, list2):
     """Similar to eltToElt, but also associate the position of the value in list2. Or the length of list2 its not a value."""
     reverse = dict()
@@ -34,6 +34,5 @@ def eltToPos(list1, list2):
     for pos, elt in enumerate(list2):
         reverse[elt] = pos
     mapping = [(reverse.get(value, l), key) for key, value in  eltToElt(list1, list2)]
-    print(f"eltToElt({list1},{list2}) = {mapping}")
+    #print(f"eltToElt({list1},{list2}) = {mapping}")
     return mapping
-    
