@@ -1,28 +1,34 @@
 from anki.lang import _
-from .cloze import getTemplateList
-from .twoLists import eltToPos
 from aqt.browser import ChangeModel
+from aqt.qt import QComboBox, QGridLayout, QLabel, QWidget
+
+from .cloze import getTemplateList
 from .config import getUserOption
-from aqt.qt import QGridLayout, QWidget, QComboBox, QLabel
+from .twoLists import eltToPos
+
 
 def rebuildTemplateMap(self):
     self.tsrc = getTemplateList(self, self.oldModel)
     self.tdst = getTemplateList(self, self.targetModel)
     return _rebuildMap(self, "t")
 
+
 ChangeModel.rebuildTemplateMap = rebuildTemplateMap
+
 
 def rebuildFieldMap(self):
     self.fsrc = self.oldModel["flds"]
     self.fdst = self.targetModel["flds"]
     return _rebuildMap(self, "f")
+
+
 ChangeModel.rebuildFieldMap = rebuildFieldMap
 
 
 def _rebuildMap(self, key):
     """
     key -- either "t" or "f", for template or fields. What to edit.
-   
+
     """
     map = getattr(self, key + "widg")
     lay = getattr(self, key + "layout")
@@ -35,7 +41,7 @@ def _rebuildMap(self, key):
     combos = []
     targets = [template['name'] for template in getattr(self, key+"dst")]
     indices = {}
-    sources = getattr(self,key+"src")
+    sources = getattr(self, key+"src")
     sourcesNames = [template["name"] for template in sources]
     if getUserOption("Associate to same name"):
         assoc = eltToPos(sourcesNames, targets)
@@ -58,4 +64,3 @@ def _rebuildMap(self, key):
     setattr(self, key + "layout", lay)
     setattr(self, key + "combos", combos)
     setattr(self, key + "indices", indices)
-

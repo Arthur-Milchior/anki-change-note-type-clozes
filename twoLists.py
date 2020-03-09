@@ -19,11 +19,10 @@ def eltToElt(list1, list2):
             value = key
         elif usedValues < nbUsableValues:
             value = usableValue[usedValues]
-            usedValues +=1
+            usedValues += 1
         else:
             value = None
-        mapping.append((key,value))
-    #print(f"eltToElt({list1},{list2}) = {mapping}")
+        mapping.append((key, value))
     return mapping
 
 
@@ -33,6 +32,6 @@ def eltToPos(list1, list2):
     l = len(list2)
     for pos, elt in enumerate(list2):
         reverse[elt] = pos
-    mapping = [(reverse.get(value, l), key) for key, value in  eltToElt(list1, list2)]
-    #print(f"eltToElt({list1},{list2}) = {mapping}")
+    mapping = [(reverse.get(value, l), key)
+               for key, value in eltToElt(list1, list2)]
     return mapping

@@ -1,7 +1,8 @@
-from anki.utils import ids2str, intTime
 from anki.models import ModelManager
+from anki.utils import ids2str, intTime
 
-#removed the special case of MODEL_CLOZE
+
+# removed the special case of MODEL_CLOZE
 def _changeCards(self, nids, oldModel, newModel, map):
     """Change the note whose ids are nid to the model newModel, reorder
     fields according to map. Write the change in the database
@@ -17,15 +18,17 @@ def _changeCards(self, nids, oldModel, newModel, map):
     d = []
     deleted = []
     for (cid, ord) in self.col.db.execute(
-        "select id, ord from cards where nid in "+ids2str(nids)):
+            "select id, ord from cards where nid in "+ids2str(nids)):
         new = map[ord]
         if new is not None:
             d.append(dict(
-                cid=cid,new=new,u=self.col.usn(),m=intTime()))
+                cid=cid, new=new, u=self.col.usn(), m=intTime()))
         else:
             deleted.append(cid)
     self.col.db.executemany(
         "update cards set ord=:new,usn=:u,mod=:m where id=:cid",
         d)
     self.col.remCards(deleted)
+
+
 ModelManager._changeCards = _changeCards
